@@ -6,11 +6,11 @@ interface SeverityBadgeProps {
 }
 
 const severityConfig = {
-  1: { color: "bg-green-100 text-green-800", label: "Minor" },
-  2: { color: "bg-green-200 text-green-900", label: "Low" },
-  3: { color: "bg-yellow-100 text-yellow-800", label: "Medium" },
-  4: { color: "bg-orange-100 text-orange-800", label: "High" },
-  5: { color: "bg-red-100 text-red-800", label: "Critical" },
+  1: { color: "bg-juniper-100 text-juniper-700", label: "Minor" },
+  2: { color: "bg-juniper-200 text-russett", label: "Low" },
+  3: { color: "bg-napa-200 text-russett", label: "Medium" },
+  4: { color: "bg-geraldine-100 text-russett", label: "High" },
+  5: { color: "bg-russett text-white", label: "Critical" },
 };
 
 export function SeverityBadge({ level, className = "" }: SeverityBadgeProps) {

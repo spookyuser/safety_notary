@@ -18,8 +18,8 @@ export default function HomePage() {
   const recentIncidents = incidents?.slice(0, 5) || [];
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
+    <div className="bg-cameo min-h-screen">
+      <div className="bg-gradient-to-r from-juniper to-russett text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-5xl font-bold mb-6">
             Global AI Safety Notary
@@ -32,13 +32,13 @@ export default function HomePage() {
           <div className="flex space-x-4">
             <Link
               href="/submit"
-              className="px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition"
+              className="px-6 py-3 bg-white text-juniper rounded-lg font-semibold hover:bg-cameo-50 transition"
             >
               Submit Incident
             </Link>
             <Link
               href="/incidents"
-              className="px-6 py-3 bg-blue-700 text-white rounded-lg font-semibold hover:bg-blue-800 transition border border-white"
+              className="px-6 py-3 bg-juniper-700 text-white rounded-lg font-semibold hover:bg-juniper-800 transition border border-white"
             >
               View All Incidents
             </Link>
@@ -49,41 +49,41 @@ export default function HomePage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="bg-white p-6 rounded-lg shadow">
-            <div className="text-3xl font-bold text-blue-600 mb-2">
+            <div className="text-3xl font-bold text-juniper mb-2">
               {stats.total}
             </div>
-            <div className="text-gray-600">Total Incidents</div>
+            <div className="text-russett-400">Total Incidents</div>
           </div>
           <div className="bg-white p-6 rounded-lg shadow">
-            <div className="text-3xl font-bold text-green-600 mb-2">
+            <div className="text-3xl font-bold text-juniper-600 mb-2">
               {stats.verified}
             </div>
-            <div className="text-gray-600">Verified Incidents</div>
+            <div className="text-russett-400">Verified Incidents</div>
           </div>
           <div className="bg-white p-6 rounded-lg shadow">
-            <div className="text-3xl font-bold text-red-600 mb-2">
+            <div className="text-3xl font-bold text-geraldine mb-2">
               {stats.critical}
             </div>
-            <div className="text-gray-600">Critical Incidents</div>
+            <div className="text-russett-400">Critical Incidents</div>
           </div>
         </div>
 
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-bold text-russett mb-6">
             Recent Incidents
           </h2>
           {isLoading ? (
-            <div className="text-center py-12 text-gray-600">
+            <div className="text-center py-12 text-russett-400">
               Loading incidents...
             </div>
           ) : recentIncidents.length === 0 ? (
-            <div className="text-center py-12 bg-white rounded-lg border border-gray-200">
-              <p className="text-gray-600 mb-4">
+            <div className="text-center py-12 bg-white rounded-lg border border-napa">
+              <p className="text-russett-400 mb-4">
                 No incidents reported yet. Be the first to contribute!
               </p>
               <Link
                 href="/submit"
-                className="inline-block px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                className="inline-block px-6 py-2 bg-juniper text-white rounded-md hover:bg-juniper-700"
               >
                 Submit First Incident
               </Link>
@@ -98,28 +98,28 @@ export default function HomePage() {
         </div>
 
         <div className="bg-white p-8 rounded-lg shadow">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-russett mb-4">
             How It Works
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <div className="text-4xl mb-3">1️⃣</div>
               <h3 className="text-lg font-semibold mb-2">Report Incident</h3>
-              <p className="text-gray-600">
+              <p className="text-russett-400">
                 Submit AI safety incidents with detailed evidence stored on IPFS.
               </p>
             </div>
             <div>
               <div className="text-4xl mb-3">2️⃣</div>
               <h3 className="text-lg font-semibold mb-2">On-Chain Record</h3>
-              <p className="text-gray-600">
+              <p className="text-russett-400">
                 Each incident becomes an immutable attestation on Ethereum.
               </p>
             </div>
             <div>
               <div className="text-4xl mb-3">3️⃣</div>
               <h3 className="text-lg font-semibold mb-2">Community Verify</h3>
-              <p className="text-gray-600">
+              <p className="text-russett-400">
                 Anyone can verify incidents, building a trustworthy registry.
               </p>
             </div>

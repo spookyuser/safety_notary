@@ -13,10 +13,10 @@ export default function SubmitPage() {
   if (!isConnected) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-20 text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">
+        <h1 className="text-3xl font-bold text-russett mb-6">
           Submit Safety Incident
         </h1>
-        <p className="text-gray-600 mb-8">
+        <p className="text-russett-400 mb-8">
           Connect your wallet to submit an AI safety incident to the registry.
         </p>
         <ConnectButton />
@@ -27,10 +27,10 @@ export default function SubmitPage() {
   if (isWrongNetwork) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-20 text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">
+        <h1 className="text-3xl font-bold text-russett mb-6">
           Wrong Network
         </h1>
-        <p className="text-gray-600 mb-8">
+        <p className="text-russett-400 mb-8">
           Please switch to Sepolia testnet to submit incidents.
         </p>
         <ConnectButton />
@@ -41,10 +41,10 @@ export default function SubmitPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <h1 className="text-3xl font-bold text-russett mb-2">
           Submit Safety Incident
         </h1>
-        <p className="text-gray-600">
+        <p className="text-russett-400">
           Report an AI safety incident with evidence. All submissions are
           recorded on-chain and stored on IPFS for transparency.
         </p>
@@ -54,9 +54,9 @@ export default function SubmitPage() {
         <IncidentForm />
       </div>
 
-      <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-        <h3 className="font-semibold text-blue-900 mb-2">Guidelines</h3>
-        <ul className="text-sm text-blue-800 space-y-1">
+      <div className="mt-8 bg-juniper-50 border border-juniper-200 rounded-lg p-6">
+        <h3 className="font-semibold text-juniper-700 mb-2">Guidelines</h3>
+        <ul className="text-sm text-juniper-600 space-y-1">
           <li>• Provide clear, factual information about the incident</li>
           <li>• Include reproducible steps when possible</li>
           <li>• Upload relevant evidence (screenshots, logs, etc.)</li>

@@ -21,10 +21,10 @@ export default function VerifyPage() {
   if (!isConnected) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">
+        <h1 className="text-3xl font-bold text-russett mb-6">
           Verification Dashboard
         </h1>
-        <p className="text-gray-600 mb-8">
+        <p className="text-russett-400 mb-8">
           Connect your wallet to verify AI safety incidents.
         </p>
         <ConnectButton />
@@ -35,20 +35,20 @@ export default function VerifyPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <h1 className="text-3xl font-bold text-russett mb-2">
           Verification Dashboard
         </h1>
-        <p className="text-gray-600">
+        <p className="text-russett-400">
           Review and verify unverified incidents. Your verification will be
           recorded on-chain as an attestation.
         </p>
       </div>
 
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-        <h3 className="font-semibold text-blue-900 mb-2">
+      <div className="bg-juniper-50 border border-juniper-200 rounded-lg p-6 mb-8">
+        <h3 className="font-semibold text-juniper-700 mb-2">
           Verification Guidelines
         </h3>
-        <ul className="text-sm text-blue-800 space-y-1">
+        <ul className="text-sm text-juniper-600 space-y-1">
           <li>• Review the incident details and evidence carefully</li>
           <li>• Verify that the information is accurate and factual</li>
           <li>• Check that evidence supports the claims made</li>
@@ -60,21 +60,21 @@ export default function VerifyPage() {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-12 text-gray-600">
+        <div className="text-center py-12 text-russett-400">
           Loading unverified incidents...
         </div>
       ) : !unverifiedIncidents || unverifiedIncidents.length === 0 ? (
-        <div className="text-center py-12 bg-white rounded-lg border border-gray-200">
-          <p className="text-gray-600 mb-2">
+        <div className="text-center py-12 bg-white rounded-lg border border-napa">
+          <p className="text-russett-400 mb-2">
             No unverified incidents at this time.
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-russett-400">
             All incidents have been verified. Check back later!
           </p>
         </div>
       ) : (
         <div>
-          <div className="mb-4 text-sm text-gray-600">
+          <div className="mb-4 text-sm text-russett-400">
             {unverifiedIncidents.length} incident(s) awaiting verification
           </div>
           <div className="grid grid-cols-1 gap-4">
@@ -88,7 +88,7 @@ export default function VerifyPage() {
                       handleVerify(incident.uid);
                     }}
                     disabled={isPending}
-                    className="px-4 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-4 py-2 bg-geraldine text-white text-sm rounded-md hover:bg-geraldine-700 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isPending ? "Verifying..." : "Verify"}
                   </button>
@@ -99,9 +99,9 @@ export default function VerifyPage() {
         </div>
       )}
 
-      <div className="mt-8 bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-        <h3 className="font-semibold text-yellow-900 mb-2">Note</h3>
-        <p className="text-sm text-yellow-800">
+      <div className="mt-8 bg-geraldine-50 border border-geraldine-200 rounded-lg p-6">
+        <h3 className="font-semibold text-geraldine-700 mb-2">Note</h3>
+        <p className="text-sm text-geraldine-600">
           Verifying an incident requires signing a transaction on the Sepolia
           testnet. Make sure you have some Sepolia ETH in your wallet for gas
           fees.

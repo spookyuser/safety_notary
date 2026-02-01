@@ -13,31 +13,31 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center space-x-8">
-            <Link href="/" className="text-xl font-bold text-gray-900">
+            <Link href="/" className="text-xl font-bold text-russett">
               AI Safety Notary
             </Link>
             <nav className="hidden md:flex space-x-6">
               <Link
                 href="/"
-                className="text-gray-700 hover:text-gray-900 transition"
+                className="text-russett-400 hover:text-russett transition"
               >
                 Home
               </Link>
               <Link
                 href="/submit"
-                className="text-gray-700 hover:text-gray-900 transition"
+                className="text-russett-400 hover:text-russett transition"
               >
                 Submit
               </Link>
               <Link
                 href="/incidents"
-                className="text-gray-700 hover:text-gray-900 transition"
+                className="text-russett-400 hover:text-russett transition"
               >
                 Incidents
               </Link>
               <Link
                 href="/verify"
-                className="text-gray-700 hover:text-gray-900 transition"
+                className="text-russett-400 hover:text-russett transition"
               >
                 Verify
               </Link>
@@ -45,7 +45,7 @@ export function Header() {
           </div>
           <div className="flex items-center space-x-4">
             {isWrongNetwork && (
-              <div className="hidden sm:block px-3 py-1 bg-red-100 text-red-800 text-sm rounded-md">
+              <div className="hidden sm:block px-3 py-1 bg-geraldine-100 text-geraldine-800 text-sm rounded-md">
                 Wrong Network - Switch to Sepolia
               </div>
             )}

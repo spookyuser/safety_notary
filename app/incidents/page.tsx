@@ -55,14 +55,14 @@ export default function IncidentsPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">
+      <h1 className="text-3xl font-bold text-russett mb-8">
         All Incidents ({filteredIncidents.length})
       </h1>
 
       <div className="bg-white p-6 rounded-lg shadow mb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-russett mb-2">
               Search
             </label>
             <input
@@ -70,18 +70,18 @@ export default function IncidentsPage() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search by model or description..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-russett mb-2">
               Type
             </label>
             <select
               value={filterType}
               onChange={(e) => setFilterType(e.target.value as IncidentType | "all")}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
             >
               <option value="all">All Types</option>
               <option value="bias">Bias</option>
@@ -93,7 +93,7 @@ export default function IncidentsPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-russett mb-2">
               Severity
             </label>
             <select
@@ -103,7 +103,7 @@ export default function IncidentsPage() {
                   e.target.value === "all" ? "all" : (Number(e.target.value) as SeverityLevel)
                 )
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
             >
               <option value="all">All Levels</option>
               <option value="1">1 - Minor</option>
@@ -115,13 +115,13 @@ export default function IncidentsPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-russett mb-2">
               Status
             </label>
             <select
               value={filterVerified}
               onChange={(e) => setFilterVerified(e.target.value as "all" | "verified" | "unverified")}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
             >
               <option value="all">All Status</option>
               <option value="verified">Verified</option>
@@ -131,17 +131,17 @@ export default function IncidentsPage() {
         </div>
 
         <div className="mt-4 flex justify-between items-center">
-          <div className="text-sm text-gray-600">
+          <div className="text-sm text-russett-400">
             Showing {filteredIncidents.length} incident(s)
           </div>
           <div>
-            <label className="inline-block text-sm font-medium text-gray-700 mr-2">
+            <label className="inline-block text-sm font-medium text-russett mr-2">
               Sort by:
             </label>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as "newest" | "oldest" | "severity")}
-              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
             >
               <option value="newest">Newest First</option>
               <option value="oldest">Oldest First</option>
@@ -152,10 +152,10 @@ export default function IncidentsPage() {
       </div>
 
       {isLoading ? (
-        <div className="text-center py-12 text-gray-600">Loading incidents...</div>
+        <div className="text-center py-12 text-russett-400">Loading incidents...</div>
       ) : filteredIncidents.length === 0 ? (
-        <div className="text-center py-12 bg-white rounded-lg border border-gray-200">
-          <p className="text-gray-600">No incidents match your filters.</p>
+        <div className="text-center py-12 bg-white rounded-lg border border-napa">
+          <p className="text-russett-400">No incidents match your filters.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-4">
