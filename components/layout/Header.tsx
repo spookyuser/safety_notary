@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useAccount } from "wagmi";
 
 export function Header() {
-  const { chain } = useAccount();
-  const isWrongNetwork = chain?.id !== 11155111;
+  const { chain, isConnected } = useAccount();
+  const isWrongNetwork = isConnected && chain?.id !== 11155111;
 
   return (
     <header className="border-b bg-white">

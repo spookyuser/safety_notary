@@ -14,7 +14,7 @@ export function IncidentForm() {
   const { mutate: createAttestation, isPending, isSuccess, txHash } = useCreateAttestation();
 
   const [step, setStep] = useState<1 | 2>(1);
-  const [incidentType, setIncidentType] = useState<IncidentType>("hallucination");
+  const [incidentType, setIncidentType] = useState<IncidentType>("safety-violation");
   const [modelIdentifier, setModelIdentifier] = useState("");
   const [severityLevel, setSeverityLevel] = useState<SeverityLevel>(3);
 
@@ -129,7 +129,7 @@ export function IncidentForm() {
               value={organisationName}
               onChange={(e) => setOrganisationName(e.target.value)}
               placeholder="e.g., Acme Corporation"
-              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
+              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper text-russett-800"
             />
           </div>
 
@@ -144,7 +144,7 @@ export function IncidentForm() {
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
                 placeholder="e.g., United States"
-                className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
+                className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper text-russett-800"
               />
             </div>
             <div>
@@ -156,7 +156,7 @@ export function IncidentForm() {
                 value={region}
                 onChange={(e) => setRegion(e.target.value)}
                 placeholder="e.g., California"
-                className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
+                className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper text-russett-800"
               />
             </div>
             <div>
@@ -168,7 +168,7 @@ export function IncidentForm() {
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
                 placeholder="e.g., San Francisco"
-                className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
+                className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper text-russett-800"
               />
             </div>
           </div>
@@ -181,10 +181,8 @@ export function IncidentForm() {
               required
               value={incidentType}
               onChange={(e) => setIncidentType(e.target.value as IncidentType)}
-              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
+              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper text-russett-800"
             >
-              <option value="bias">Bias</option>
-              <option value="hallucination">Hallucination</option>
               <option value="safety-violation">Safety Violation</option>
               <option value="data-leak">Data Leak</option>
               <option value="other">Other</option>
@@ -201,7 +199,7 @@ export function IncidentForm() {
               value={modelIdentifier}
               onChange={(e) => setModelIdentifier(e.target.value)}
               placeholder="e.g., gpt-4-turbo, claude-3-opus"
-              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
+              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper text-russett-800"
             />
           </div>
 
@@ -234,7 +232,7 @@ export function IncidentForm() {
               onChange={(e) => setDescription(e.target.value)}
               rows={4}
               placeholder="Describe the AI safety incident in detail..."
-              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
+              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper text-russett-800"
             />
           </div>
 
@@ -248,7 +246,7 @@ export function IncidentForm() {
               onChange={(e) => setIntendedActions(e.target.value)}
               rows={3}
               placeholder="What actions do you intend to take or recommend?"
-              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
+              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper text-russett-800"
             />
           </div>
         </>

@@ -6,6 +6,23 @@ interface IncidentCardProps {
   incident: AttestationData;
 }
 
+interface ParsedDescription {
+  organisationName?: string;
+  country?: string;
+  region?: string;
+  city?: string;
+  description?: string;
+  intendedActions?: string;
+}
+
+function parseDescription(raw: string): ParsedDescription | null {
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
 function formatDate(timestamp: bigint): string {
   const date = new Date(Number(timestamp) * 1000);
   return date.toLocaleDateString("en-US", {
@@ -16,6 +33,10 @@ function formatDate(timestamp: bigint): string {
 }
 
 export function IncidentCard({ incident }: IncidentCardProps) {
+  const parsed = parseDescription(incident.description);
+  const displayDescription = parsed?.description || incident.description;
+  const location = parsed ? [parsed.city, parsed.region, parsed.country].filter(Boolean).join(", ") : null;
+
   return (
     <Link href={`/incidents/${incident.uid}`}>
       <div className="bg-white border border-napa rounded-lg p-6 hover:shadow-lg transition-shadow cursor-pointer">
@@ -28,10 +49,13 @@ export function IncidentCard({ incident }: IncidentCardProps) {
               <SeverityBadge level={incident.severityLevel} />
             </div>
             <h3 className="text-lg font-semibold text-russett mb-1">
-              {incident.modelIdentifier}
+              {parsed?.organisationName || incident.modelIdentifier}
             </h3>
+            {location && (
+              <p className="text-russett-400 text-xs mb-1">{location}</p>
+            )}
             <p className="text-russett-400 text-sm line-clamp-2">
-              {incident.description}
+              {displayDescription}
             </p>
           </div>
         </div>

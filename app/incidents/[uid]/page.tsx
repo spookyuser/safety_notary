@@ -7,6 +7,23 @@ import { EASSCAN_ATTESTATION_URL } from "@/lib/config/eas";
 
 export const dynamic = "force-dynamic";
 
+interface ParsedDescription {
+  organisationName?: string;
+  country?: string;
+  region?: string;
+  city?: string;
+  description?: string;
+  intendedActions?: string;
+}
+
+function parseDescription(raw: string): ParsedDescription | null {
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
 export default function IncidentDetailPage() {
   const params = useParams();
   const uid = params.uid as string;
@@ -44,7 +61,7 @@ export default function IncidentDetailPage() {
       <div className="mb-6">
         <a
           href="/incidents"
-          className="text-juniper hover:text-juniper-700 text-sm"
+          className="text-juniper-800 hover:text-juniper-900 text-sm font-medium"
         >
           ← Back to All Incidents
         </a>
@@ -66,12 +83,46 @@ export default function IncidentDetailPage() {
         </div>
 
         <div className="space-y-6">
-          <div>
-            <h2 className="text-lg font-semibold text-russett mb-2">
-              Description
-            </h2>
-            <p className="text-russett-400">{incident.description}</p>
-          </div>
+          {(() => {
+            const parsed = parseDescription(incident.description);
+            if (parsed) {
+              const location = [parsed.city, parsed.region, parsed.country].filter(Boolean).join(", ");
+              return (
+                <>
+                  {parsed.organisationName && (
+                    <div>
+                      <h2 className="text-lg font-semibold text-russett mb-2">Organisation</h2>
+                      <p className="text-russett-400">{parsed.organisationName}</p>
+                    </div>
+                  )}
+                  {location && (
+                    <div>
+                      <h2 className="text-lg font-semibold text-russett mb-2">Location</h2>
+                      <p className="text-russett-400">{location}</p>
+                    </div>
+                  )}
+                  {parsed.description && (
+                    <div>
+                      <h2 className="text-lg font-semibold text-russett mb-2">Description</h2>
+                      <p className="text-russett-400 whitespace-pre-wrap">{parsed.description}</p>
+                    </div>
+                  )}
+                  {parsed.intendedActions && (
+                    <div>
+                      <h2 className="text-lg font-semibold text-russett mb-2">Intended Actions</h2>
+                      <p className="text-russett-400 whitespace-pre-wrap">{parsed.intendedActions}</p>
+                    </div>
+                  )}
+                </>
+              );
+            }
+            return (
+              <div>
+                <h2 className="text-lg font-semibold text-russett mb-2">Description</h2>
+                <p className="text-russett-400">{incident.description}</p>
+              </div>
+            );
+          })()}
 
           <div className="grid grid-cols-2 gap-6">
             <div>

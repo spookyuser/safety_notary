@@ -77,8 +77,6 @@ export default function IncidentsPage() {
               className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
             >
               <option value="all">All Types</option>
-              <option value="bias">Bias</option>
-              <option value="hallucination">Hallucination</option>
               <option value="safety-violation">Safety Violation</option>
               <option value="data-leak">Data Leak</option>
               <option value="other">Other</option>

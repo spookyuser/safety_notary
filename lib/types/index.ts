@@ -1,6 +1,4 @@
 export type IncidentType =
-  | "bias"
-  | "hallucination"
   | "safety-violation"
   | "data-leak"
   | "other";
