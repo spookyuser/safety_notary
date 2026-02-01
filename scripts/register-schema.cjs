@@ -1,5 +1,5 @@
-import { SchemaRegistry } from "@ethereum-attestation-service/eas-sdk";
-import { ethers } from "ethers";
+const { SchemaRegistry } = require("@ethereum-attestation-service/eas-sdk");
+const { ethers } = require("ethers");
 
 const SCHEMA_REGISTRY_ADDRESS = "0x0a7E2Ff54e76B8E6659aedc9103FB21c038050D0";
 
@@ -11,11 +11,11 @@ async function registerSchema() {
 
   if (!privateKey) {
     console.error("Error: PRIVATE_KEY environment variable not set");
-    console.log("Usage: PRIVATE_KEY=0x... npm run register-schema");
+    console.log("Usage: PRIVATE_KEY=0x... node scripts/register-schema.cjs");
     process.exit(1);
   }
 
-  const provider = new ethers.JsonRpcProvider("https://rpc.sepolia.org");
+  const provider = new ethers.JsonRpcProvider("https://ethereum-sepolia-rpc.publicnode.com");
   const signer = new ethers.Wallet(privateKey, provider);
 
   console.log("Registering schema on Sepolia...");
