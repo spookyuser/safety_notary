@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import {
   IncidentType,
   SeverityLevel,
-  ReporterRole,
   SafetyIncident,
 } from "@/lib/types";
 import { useCreateAttestation } from "@/lib/eas/hooks";
@@ -14,31 +13,46 @@ export function IncidentForm() {
   const router = useRouter();
   const { mutate: createAttestation, isPending, isSuccess, txHash } = useCreateAttestation();
 
-  const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [step, setStep] = useState<1 | 2>(1);
   const [incidentType, setIncidentType] = useState<IncidentType>("hallucination");
   const [modelIdentifier, setModelIdentifier] = useState("");
   const [severityLevel, setSeverityLevel] = useState<SeverityLevel>(3);
+
+  // New fields
+  const [organisationName, setOrganisationName] = useState("");
+  const [country, setCountry] = useState("");
+  const [region, setRegion] = useState("");
+  const [city, setCity] = useState("");
   const [description, setDescription] = useState("");
-  const [detailedDescription, setDetailedDescription] = useState("");
-  const [reporterRole, setReporterRole] = useState<ReporterRole>("user");
+  const [intendedActions, setIntendedActions] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    if (step < 3) {
-      setStep((prev) => (prev + 1) as 1 | 2 | 3);
+    if (step < 2) {
+      setStep(2);
       return;
     }
 
     try {
+      // Store structured data as JSON in the description field
+      const structuredData = {
+        organisationName,
+        country,
+        region,
+        city,
+        description,
+        intendedActions,
+      };
+
       const incidentData: SafetyIncident = {
         incidentType,
         modelIdentifier,
         severityLevel,
-        description,
+        description: JSON.stringify(structuredData),
         evidenceHash: "",
         timestamp: BigInt(Math.floor(Date.now() / 1000)),
-        reporterRole,
+        reporterRole: "user",
         verified: false,
         mitigationStatus: "pending",
       };
@@ -84,7 +98,7 @@ export function IncidentForm() {
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center justify-between mb-6">
         <div className="flex space-x-4">
-          {[1, 2, 3].map((s) => (
+          {[1, 2].map((s) => (
             <div
               key={s}
               className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
@@ -100,12 +114,66 @@ export function IncidentForm() {
           ))}
         </div>
         <div className="text-sm text-russett-400">
-          Step {step} of 3
+          Step {step} of 2
         </div>
       </div>
 
       {step === 1 && (
         <>
+          <div>
+            <label className="block text-sm font-medium text-russett mb-2">
+              Organisation Name *
+            </label>
+            <input
+              required
+              type="text"
+              value={organisationName}
+              onChange={(e) => setOrganisationName(e.target.value)}
+              placeholder="e.g., Acme Corporation"
+              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-russett mb-2">
+                Country *
+              </label>
+              <input
+                required
+                type="text"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                placeholder="e.g., United States"
+                className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-russett mb-2">
+                Region
+              </label>
+              <input
+                type="text"
+                value={region}
+                onChange={(e) => setRegion(e.target.value)}
+                placeholder="e.g., California"
+                className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-russett mb-2">
+                City
+              </label>
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="e.g., San Francisco"
+                className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
+              />
+            </div>
+          </div>
+
           <div>
             <label className="block text-sm font-medium text-russett mb-2">
               Incident Type *
@@ -159,64 +227,50 @@ export function IncidentForm() {
 
           <div>
             <label className="block text-sm font-medium text-russett mb-2">
-              Brief Description * (max 500 chars)
+              Description *
             </label>
             <textarea
               required
-              maxLength={500}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              rows={3}
+              rows={4}
+              placeholder="Describe the AI safety incident in detail..."
               className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
             />
-            <div className="text-xs text-russett-400 mt-1">
-              {description.length}/500
-            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-russett mb-2">
+              Intended Actions *
+            </label>
+            <textarea
+              required
+              value={intendedActions}
+              onChange={(e) => setIntendedActions(e.target.value)}
+              rows={3}
+              placeholder="What actions do you intend to take or recommend?"
+              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
+            />
           </div>
         </>
       )}
 
       {step === 2 && (
-        <>
-          <div>
-            <label className="block text-sm font-medium text-russett mb-2">
-              Detailed Description
-            </label>
-            <textarea
-              value={detailedDescription}
-              onChange={(e) => setDetailedDescription(e.target.value)}
-              rows={6}
-              placeholder="Provide detailed information about the incident, steps to reproduce, context, etc."
-              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-russett mb-2">
-              Reporter Role *
-            </label>
-            <select
-              required
-              value={reporterRole}
-              onChange={(e) => setReporterRole(e.target.value as ReporterRole)}
-              className="w-full px-3 py-2 border border-napa rounded-md focus:outline-none focus:ring-2 focus:ring-juniper"
-            >
-              <option value="user">User</option>
-              <option value="researcher">Researcher</option>
-              <option value="engineer">Engineer</option>
-              <option value="auditor">Auditor</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-        </>
-      )}
-
-      {step === 3 && (
         <div className="bg-cameo-50 p-6 rounded-lg">
           <h3 className="text-lg font-semibold text-russett mb-4">Review Your Submission</h3>
           <dl className="space-y-3">
             <div>
-              <dt className="text-sm font-medium text-russett-400">Type</dt>
+              <dt className="text-sm font-medium text-russett-400">Organisation</dt>
+              <dd className="text-sm text-russett">{organisationName}</dd>
+            </div>
+            <div>
+              <dt className="text-sm font-medium text-russett-400">Location</dt>
+              <dd className="text-sm text-russett">
+                {[city, region, country].filter(Boolean).join(", ")}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-sm font-medium text-russett-400">Incident Type</dt>
               <dd className="text-sm text-russett">{incidentType}</dd>
             </div>
             <div>
@@ -229,11 +283,11 @@ export function IncidentForm() {
             </div>
             <div>
               <dt className="text-sm font-medium text-russett-400">Description</dt>
-              <dd className="text-sm text-russett">{description}</dd>
+              <dd className="text-sm text-russett whitespace-pre-wrap">{description}</dd>
             </div>
             <div>
-              <dt className="text-sm font-medium text-russett-400">Reporter Role</dt>
-              <dd className="text-sm text-russett">{reporterRole}</dd>
+              <dt className="text-sm font-medium text-russett-400">Intended Actions</dt>
+              <dd className="text-sm text-russett whitespace-pre-wrap">{intendedActions}</dd>
             </div>
           </dl>
         </div>
@@ -243,7 +297,7 @@ export function IncidentForm() {
         {step > 1 && (
           <button
             type="button"
-            onClick={() => setStep((prev) => (prev - 1) as 1 | 2 | 3)}
+            onClick={() => setStep(1)}
             disabled={isPending}
             className="px-6 py-2 border border-napa rounded-md text-russett hover:bg-cameo-50 disabled:opacity-50"
           >
@@ -257,7 +311,7 @@ export function IncidentForm() {
         >
           {isPending
             ? "Processing..."
-            : step === 3
+            : step === 2
             ? "Submit Incident"
             : "Next"}
         </button>
